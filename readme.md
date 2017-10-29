@@ -1,6 +1,6 @@
 # Git learning notes
 
-## escription
+## Dscription
 This is just for git learning and exercising :).
 
 I've learned a lot about git. The following is some commands that I used.
@@ -28,7 +28,8 @@ I've learned a lot about git. The following is some commands that I used.
 - `git rm file`+`git commit -m "some notes"`(delete some file)
 
 ### remote repository
-- Under the `User/.ssh/` there are 2 files: id_rsa(Personal Key) id_rsa.pub(Public Key). DO NOT TELL/SHARE ANYONE YOUR PERSONAL KEY！！！（sometimes you need type `chmod 600` if shell shows that "your key is open"）
+- Under the `User/.ssh/` there are 2 files: id_rsa(Personal Key) id_rsa.pub(Public Key). 
+DO NOT TELL/SHARE ANYONE YOUR PERSONAL KEY！！！（sometimes you need type `chmod 600` if shell shows that "your key is open"）
 
 ### push
 - `git remote add origin git@server-name:path/repo-name.git`(somehow it didn't work with `origin` so I change it to `origin1`.so were the following cases)
