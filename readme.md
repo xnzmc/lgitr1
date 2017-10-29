@@ -29,12 +29,13 @@ I've learned a lot about git. The following is some commands that I used.
 
 ### remote repository
 - Under the `User/.ssh/` there are 2 files: id_rsa(Personal Key) id_rsa.pub(Public Key). 
+
 DO NOT TELL/SHARE ANYONE YOUR PERSONAL KEY！！！（sometimes you need type `chmod 600` if shell shows that "your key is open"）
 
 ### push
-- `git remote add origin git@server-name:path/repo-name.git`(somehow it didn't work with `origin` so I change it to `origin1`.so were the following cases)
+- `git remote add origin git@server-name:path/repo-name.git`(somehow it didn't work with `origin` so I change it to `origin1`. so were the following cases)
 - `git push -u origin master`
 - `git push origin master
 
 ### clone
-- `git clone git@github.com:someuser/somework.git`(Note that the directory that file you cloned is related your shell directory when running the command)
+- `git clone git@github.com:someuser/somework.git`(Note that the directory that file you cloned is related to your shell directory when running the command)
