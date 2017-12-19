@@ -32,6 +32,16 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 `git log` 有许多参数，可以格式化输出commit的各种信息，甚至包括图像`--pragh`
 `git commit --amend`如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息。相当于修改commit的注释
 
+撤销add -- 如果文件修改后add，但是想要撤销，则相当于对文件进行 `git reset HEAD filename`
+撤销修改 -- 如果文件正在编辑想要取消，相当于对文件进行删除或者其他修改 `git checkout -- filename`
+
+`git fetch`是将远程仓库的数据抓取到本地，但并不会自动的合并和修改当前文件，而需要手动
+`git pull`则会抓取数据后自动尝试合并
+`git remote -v`查看远程主机
+`git remote rm`删除远程主机
+`git remote rename old new`远程主机改名
+`git clone -o name url`克隆版本库并将远程主机命名为name
+
 ------
 
 ## 初步步骤
