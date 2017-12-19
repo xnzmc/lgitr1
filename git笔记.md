@@ -25,8 +25,12 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 `git diff filename`查看的是缓存前后的变化 也就是add后是否编辑修改
 `git diff --cached`查看的是add前后的变化，也就是add对文件做的修改（因为不加文件名，所以针对所有文件）
 
+`git commit` 会打开默认编辑器 进行长篇的描述
+不应该频繁的push。过度的push和commit会使得快照建立很多，后期合并或者回滚时容易迷惑
+`git mv oldfile newfile`相当于三条命令`mv old new`+`git rm old`+`git add new`
 
-
+`git log` 有许多参数，可以格式化输出commit的各种信息，甚至包括图像`--pragh`
+`git commit --amend`如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息
 
 ------
 
