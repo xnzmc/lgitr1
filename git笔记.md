@@ -30,7 +30,7 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 `git mv oldfile newfile`相当于三条命令`mv old new`+`git rm old`+`git add new`
 
 `git log` 有许多参数，可以格式化输出commit的各种信息，甚至包括图像`--pragh`
-`git commit --amend`如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息
+`git commit --amend`如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息。相当于修改commit的注释
 
 ------
 
