@@ -24,6 +24,10 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 如果`add`后，又修改文件，此时`git status`会出现两个，一个是`Changes to be commited`下显示`modified`，一个是`Changes not staged for commit`下显示`modified`。而`commit`的结果是将add的那个版本提交
 `git diff filename`查看的是缓存前后的变化 也就是add后是否编辑修改
 `git diff --cached`查看的是add前后的变化，也就是add对文件做的修改（因为不加文件名，所以针对所有文件）
+
+
+
+
 ------
 
 ## 初步步骤
