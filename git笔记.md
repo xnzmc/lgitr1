@@ -14,6 +14,8 @@ git可以先离线本地工作，然后再联网push
 4. 切换dev分支，进行开发
 5. 删除远程文件
 6. 本地合并分支，查看冲突
+7. git打标签 和 发布
+8. git工作流
 ---
 5. 多人合作出现冲突
 6. 修改期间出现冲突
@@ -155,6 +157,13 @@ git `merge`有两种模式：fast-forward和no-ff。其中后一种模式合并�
 1. 新建分支然后合并
 2. 如果新建分支后合并前，突然又需要删除，则需要强行删除`git branch -D <name>`
 
+### 合并
+1.合并工作流
+有两个分支，先合并，然后形成master
+2.两阶段合并循环
+dev下有两个feature分支，先将feature合并到dev，然后发不是将master快进到dev中
+
+
 ### 多人协作
 - `git remote`(查看远程仓库)
 - `git push orgin-name branch-name`
@@ -172,6 +181,12 @@ clone默认只能看到master分支，需要创建dev分支:`git checkout -b dev
 如果提示"no tracking inomation"。说明这里需要先指定本地dev分支和远程origin/dev分支的链接：`git branch --set-upstream dev origin/dev`
 
 再进行pull 但是合并有冲突。需要本地手动修改后再push
+
+三种分布式流程：
+
+    - 集中式：每个人向中心仓库push，其余人等待上一个人推送后在进行操作
+    - 集成管理者：贡献者克隆仓库并修改，接着pull request，等到维护者合并后推送到主仓库
+    - 司令官与副官工作流：司令官将任务分配给副官，副官接受贡献者的master，再合并至自己的master分支，接着推送到司令官的仓库中
 
 ## 标签
 - `git tag branch-name`
