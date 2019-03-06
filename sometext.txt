@@ -6,3 +6,8 @@ Creating a new branch is qiuck AND simple.
 test-test-test-test
 test2
 fixed bug...
+
+fixed bug...
+
+Add in 2019/3/6
+test1 Create a new branch called dev
