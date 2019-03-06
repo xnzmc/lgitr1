@@ -1,3 +1,40 @@
+- [git 学习笔记](#git-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0)
+    - [心得](#%E5%BF%83%E5%BE%97)
+    - [场景](#%E5%9C%BA%E6%99%AF)
+    - [初步步骤](#%E5%88%9D%E6%AD%A5%E6%AD%A5%E9%AA%A4)
+        - [初始化git仓库](#%E5%88%9D%E5%A7%8B%E5%8C%96git%E4%BB%93%E5%BA%93)
+    - [上手](#%E4%B8%8A%E6%89%8B)
+        - [添加文件到git仓库](#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0git%E4%BB%93%E5%BA%93)
+        - [查看更改](#%E6%9F%A5%E7%9C%8B%E6%9B%B4%E6%94%B9)
+        - [恢复更改](#%E6%81%A2%E5%A4%8D%E6%9B%B4%E6%94%B9)
+    - [目录](#%E7%9B%AE%E5%BD%95)
+            - [工作区 Working Directory](#%E5%B7%A5%E4%BD%9C%E5%8C%BA-working-directory)
+            - [版本库 Repository](#%E7%89%88%E6%9C%AC%E5%BA%93-repository)
+        - [撤销更改](#%E6%92%A4%E9%94%80%E6%9B%B4%E6%94%B9)
+        - [删除更改](#%E5%88%A0%E9%99%A4%E6%9B%B4%E6%94%B9)
+    - [远程仓库](#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93)
+        - [Github](#github)
+        - [push](#push)
+        - [clone](#clone)
+    - [分支管理](#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86)
+        - [创建和合并](#%E5%88%9B%E5%BB%BA%E5%92%8C%E5%90%88%E5%B9%B6)
+        - [冲突](#%E5%86%B2%E7%AA%81)
+        - [bug 分支](#bug-%E5%88%86%E6%94%AF)
+        - [feature 分支](#feature-%E5%88%86%E6%94%AF)
+        - [合并](#%E5%90%88%E5%B9%B6)
+        - [多人协作](#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C)
+    - [标签](#%E6%A0%87%E7%AD%BE)
+    - [使用github](#%E4%BD%BF%E7%94%A8github)
+    - [配置git](#%E9%85%8D%E7%BD%AEgit)
+        - [托管平台](#%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0)
+        - [忽略文件](#%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6)
+        - [配置别名](#%E9%85%8D%E7%BD%AE%E5%88%AB%E5%90%8D)
+        - [配置信息](#%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF)
+    - [具体工作流](#%E5%85%B7%E4%BD%93%E5%B7%A5%E4%BD%9C%E6%B5%81)
+
+
+
+
 # git 学习笔记
 
 ## 心得
@@ -16,33 +53,33 @@ git可以先离线本地工作，然后再联网push
 6. 本地合并分支，查看冲突
 7. git打标签 和 发布
 8. git工作流
+9. 多人协作合作
 ---
 1. 多人合作出现冲突
-2. 修改期间出现冲突(fetch rebase)
+2. 修改期间出现冲突
 
 ------
-git中文件状态分为两类：`已跟踪`、`未跟踪`
-已跟踪有分为：`modified`、`staged`、`commited`
-如果`add`后，又修改文件，此时`git status`会出现两个，一个是`Changes to be commited`下显示`modified`，一个是`Changes not staged for commit`下显示`modified`。而`commit`的结果是将add的那个版本提交
-`git diff filename`查看的是缓存前后的变化 也就是add后是否编辑修改
-`git diff --cached`查看的是add前后的变化，也就是add对文件做的修改（因为不加文件名，所以针对所有文件）
+git中文件状态分为两类：`已跟踪`、`未跟踪`。
+已跟踪有分为：`modified`、`staged`、`commited`。
+如果 `add` 后，又修改文件，此时 `git status` 会出现两个，一个是 `Changes to be commited` 下显示 `modified` ，一个是`Changes not staged for commit` 下显示 `modified`。而 `commit` 的结果是将add的那个版本提交。
+`git diff filename` 查看的是缓存前后的变化 也就是add后是否编辑修改。
+`git diff --cached` 查看的是add前后的变化，也就是add对文件做的修改（因为不加文件名，所以针对所有文件）。
 
-`git commit` 会打开默认编辑器 进行长篇的描述
-不应该频繁的push。过度的push和commit会使得快照建立很多，后期合并或者回滚时容易迷惑
-`git mv oldfile newfile`相当于三条命令`mv old new`+`git rm old`+`git add new`
+`git commit` 会打开默认编辑器 进行长篇的描述。注意不应该频繁的push。过度的push和commit会使得快照建立很多，后期合并或者回滚时容易迷惑。
+`git mv oldfile newfile` 相当于三条命令 `mv old new`+`git rm old`+`git add new` 。
 
-`git log` 有许多参数，可以格式化输出commit的各种信息，甚至包括图像`--pragh`
-`git commit --amend`如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息。相当于修改commit的注释
+`git log` 有许多参数，可以格式化输出commit的各种信息，甚至包括图像 `--pragh` 。
+`git commit --amend` 如果add的文件并未修改（自上次commit以来），则快照并不改变，只会出现文本编辑器，修改的时提交信息。相当于修改commit的注释。
 
-撤销add -- 如果文件修改后add，但是想要撤销，则相当于对文件进行 `git reset HEAD filename`
-撤销修改 -- 如果文件正在编辑想要取消，相当于对文件进行删除或者其他修改 `git checkout -- filename`
+撤销add -- 如果文件修改后add，但是想要撤销，则相当于对文件进行 `git reset HEAD filename`。
+撤销修改 -- 如果文件正在编辑想要取消，相当于对文件进行删除或者其他修改 `git checkout -- filename`。
 
-`git fetch`是将远程仓库的数据抓取到本地，但并不会自动的合并和修改当前文件，而需要手动
-`git pull`则会抓取数据后自动尝试合并
-`git remote -v`查看远程主机
-`git remote rm`删除远程主机
-`git remote rename old new`远程主机改名
-`git clone -o name url`克隆版本库并将远程主机命名为name
+`git fetch` 是将远程仓库的数据抓取到本地，但并不会自动的合并和修改当前文件，而需要手动。
+`git pull` 则会抓取数据后自动尝试合并。
+`git remote -v` 查看远程主机。
+`git remote rm` 删除远程主机。
+`git remote rename old new` 远程主机改名。
+`git clone -o name url` 克隆版本库并将远程主机命名为name。
 
 ------
 
@@ -56,8 +93,13 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 - `git config --global user.email`
 3. 查看config
 - `git config --list`
-可以输入`git config -h`获取更多信息
-
+可以输入 `git config -h` 获取更多信息
+4. config的影响范围
+- `/etc/gitconfig` `--system` 选项对此有用
+- `~/.gitconfig` `~/.config/git/cofnig` `--global` 选项对此有用
+- `.git/config` 当前仓库的配置文件
+以上三条配置依次覆盖。当前仓库的配置文件可以override系统的配置。
+*注:Win下 system的配置文件是在 MSys 的安装路径下*
 ## 上手
 ### 添加文件到git仓库
 1. 添加文件
@@ -69,24 +111,42 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 
 ### 查看更改
 - `git diff xxx.txt`
+- `git diff --staged`
 - `git status`
 - `git add xxx.txt`
 
+**说明**
+关于 `git diff` ，只显示尚未暂存的的改动，而不是自上次提交之后的修改
+关于 `git status` ，会出现既是modified，又是staged 的情况。原因在于该文件在被暂存后有进行更改。若要提交，则需要再次stage。
+这种情况可以使用 `git status -s`进行查看
+- ` M` 文件已被更改，但没有进去暂存区
+- `M ` 文件已被更改，同时进去暂存区
+- `MM` 文件已被更改，进入暂存区。之后又被更改
+- `A ` 新增文件
+- `??` 文件未被追踪 
 ### 恢复更改
 - `git reset --hard commit_id` (例如e6e1b9d)(恢复到某个版本)
+- `git reset HEAD file` 将文件从暂存区拿出
+- `git checkout -- file` 将文件恢复为上次提交的样子
 - `git log` (查看提交历史)
 - `git reflog` (查看命令历史，用来确定每次版本的commit_id)
 
+log 命令有很多格式。常用的
+- `-p`
+- `-stat`
+- `--pretty`
+- `--graph`
+- `-n` n为数字
 ## 目录
 #### 工作区 Working Directory
 例如 lgit\
 
 #### 版本库 Repository
-在工作区内有一个隐藏目录.git 
+在工作区内有一个隐藏目录`.git`。
 
-这里有暂存区stage。每次git add都是想把文件修改加入暂存区，然后git commit提交更改，就是把暂存区加入到当前分支
+这里有暂存区stage。每次git add都是先把文件修改加入暂存区，然后git commit提交更改，就是把暂存区加入到当前分支。
 
-如果文件add后有继续修改，然后直接commit的话，并不会提交。因为暂存区内并没有add过修改后的文件。所以要想commit修改过后的文件，需要先add后再commit
+如果文件add后有继续修改，然后直接commit的话，并不会提交。因为暂存区内并没有add过修改后的文件。所以要想commit修改过后的文件，需要先add后再commit。
 
 ### 撤销更改
 - 更改文件后没有add，想要直接丢弃修改 `git checkout -- file`
@@ -95,6 +155,7 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 ### 删除更改
 - 如果commit某文件后，本地误删除它想要恢复 `git checkout -- file`
 - 如果的确想删除更改 `git rm file`,然后`git commit -m`
+- 如果只是想从本地git仓库删除，但是仍保留在磁盘上。 `git rm --cached file`
 
 ## 远程仓库
 ### Github
@@ -125,7 +186,7 @@ git中文件状态分为两类：`已跟踪`、`未跟踪`
 
 - `git checkout -b dev`
 （相当于`git branch dev`+`git checkout dev`)
-- `git branch`(* 表示当前分支)
+- `git branch`(表示当前分支)
 - `git branch master`（查看master分支）
 - `git checkout <name>`(切换分支)
 - `git merge dev`（将`dev`分支合并到`master`分支上。注意要先切换到master上在进行合并）
@@ -209,8 +270,37 @@ clone默认只能看到master分支，需要创建dev分支:`git checkout -b dev
 一份本地仓库可以同时关联到多个代码托管平台，只是需要把origin更改。为每个平台分配一个恰当的名字
 ### 忽略文件
 同时，`.gitignore`文件可以负责排除不想提交的文件
+比如编辑器的临时文件以`~`结尾；或者是密码文件，日志文件等。
+**格式规范**
+空行或者`#`开头的行都会被忽略；
+可以以`/`开头 防止递归；
+可以以`/`结尾 指定目录
+`gitignore`文件使用Glob模式匹配
+- `*` 匹配0个或多个任意字符
+- `[abc]` 只匹配一个字符。或a或b或c
+- `[0-9]` 匹配0到9中的一个字符
+- `?` 只匹配一个字符
+- `**` 匹配任意中间目录。如`a/**/z`可以匹配`a/z`,`a/1/2/3/z`
 ### 配置别名
 git config --global alias
 ### 配置信息
 - 每个仓库下的信息：`.git/donfig`
 - 全局则是在用户目录下的 `.gitconfig`
+
+## 具体工作流
+以gitee为例
+- 新建用户，并且生成SSH 密钥
+    - 输入代码
+    - 找到公钥，将内容保存在网页
+    - 测试是否连接 `ssh -T git@gitee.com`
+- 新建项目
+    - 新建gitignore/readme
+    - 添加远程仓库`git remore add gitee https://xxx.com/xx/xx.git`
+    - 拉取数据 `git pull --rebase gitee master`
+    - 如果有冲突，可以忽略`git rebase --skip`（大致是这个命令，具体要看命令行提示）
+    - 注意推送到远程仓库前本地需要首先`add`和`commit`才可以。否则会提示报错
+    - 推送数据 `git push gitee master`
+- 删除远程仓库的数据，同时保留本地文件（用于本地软件配置信息）
+    - `git rm -r --cached xx.txt`
+    - `git  commit -m "delelte xx.txt"`
+    - `git push remote master`
